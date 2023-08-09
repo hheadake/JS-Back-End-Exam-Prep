@@ -4,9 +4,13 @@ const petsManager = require('../manager/petsManager')
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
+    
   const pet = await petsManager.getAll();
     res.render('photo', {pet})
 });
+
+
+
 
 router.get('/create', (req, res) => {
     res.render('photo/create')
@@ -18,14 +22,19 @@ router.post('/create', async (req, res) => {
         owner: req.user._id,
     }
         
-
-    
+try {
     await petsManager.create(photoData)
+    res.redirect('/catalog')
+    
+} catch (error) {
+     throw new Error `${error}`
+    
+}
+    
 
 
 
 
-    res.redirect('/')
 });
 
 router.get('/:photoId', async (req,res) => {

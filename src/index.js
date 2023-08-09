@@ -9,7 +9,7 @@ const { auth } = require('./middleware/authMiddleware');
 
 const app = express();
 //ToDo change name of db
-mongoose.connect('mongodb://127.0.0.1:27017/petsDb')
+mongoose.connect('mongodb://127.0.0.1:27017/gameDb')
 .then(() => {
     console.log('DB conected')
 })

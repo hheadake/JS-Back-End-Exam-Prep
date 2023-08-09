@@ -5,11 +5,8 @@ const userController = require('./controller/userController');
 const petController = require('./controller/petController');
 router.use(homeController);
 router.use('/users', userController);
-router.use('/pets', petController);
-//router.use('*', (req,res) => {
- //res.redirect('404')
+router.use('/photo', petController);
 
-//});
 
 
 module.exports = router; 

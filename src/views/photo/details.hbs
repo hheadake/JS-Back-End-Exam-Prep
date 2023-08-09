@@ -1,141 +1,36 @@
 
-    <main>
-        <div class="container">
-            <div class="col-9">
+    <main id="details">
+        <section id="details-info">
+            <div class="game-image">
+                <img src="./static/images/disney-dreamlight-valley.jpg">
+            </div>
 
-                <!-- Start Pet Photo Post Section -->
-                <div class="card">
-                    <div class="top">
-
-                        <!-- Start User Details and Image Location Section -->
-                        <div class="userDetails">
-
-                            <!-- Link to User Profile Details Page-->
-                            <div>
-                                <div class="profilepic">
-                                    <div class="profile_img">
-                                        <div class="image">
-                                            <img src="/images/person.png" alt="img8">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3>
-
-                                <!-- Link to User Profile Details Page -->
-                                <p>
-                                    <!-- User's username -->
-                                    {{photo.owner.username}}
-                                </p>
-                                <!-- photo's location -->
-                                <span> {{photo.location}} </span>
-
-                                {{#if isOwner}}
-                                <div class="edit-delete-btns">
-
-                                    <!-- Edit Pet Photo -->
-                                    <a href="/pets/{{photo._id}}/edit">
-                                        <img class="edit-img" src="/images/edit-pen-icon-6.jpg"
-                                            alt="edit button">
-                                    </a>
-
-                                    <!--Delete Pet Photo -->
-                                    <a href="/pets/{{photo._id}}/delete">
-                                        <img class="bin-img" src="/images/icon-remove-22.jpg" alt="bin button">
-                                    </a>
-                                </div>
-                                {{/if}}
-
-                            </h3>
-                        </div>
-
+            <div class="game-info">
+                <div class="game-text">
+                    <h1 id="name">Disney Dreamlight Valley</h1>
+                    <h3 id="platform">Platform: PS5</h3>
+                    <p id="price"><span>Price: $38</span></p>
+                    <p id="genre"><span>Genre: Simulator</span></p>
+                    <p id="description">Disney Dreamlight Valley is a hybrid between a life-sim and an adventure game
+                        rich with quests, exploration, and engaging activities featuring Disney and Pixar friends, both
+                        old and new. Once an idyllic land, Dreamlight Valley was a place where Disney and Pixar
+                        characters lived in harmony—until the Forgetting. Night Thorns grew across the land and severed
+                        the wonderful memories tied to this magical place. With nowhere else to go, the hopeless
+                        inhabitants of Dreamlight Valley retreated behind locked doors in the Dream Castle.</p>
+                </div>
+                <div class="product-btn">
+                    <!--Only for registered user and author of the publication -->
+                    <div class="author">
+                        <a href="#" class="btn-edit">Edit</a>
+                        <a href="#" class="btn-delete">Delete</a>
                     </div>
 
-                    <!-- Start Pet Photo -->
-                    <div class="imgBx">
-                        <!-- Pet Photo -->
-                        <img src="{{photo.imageUrl}}" alt="post" class="cover">
-                    </div>
+                    <!-- Logged in user who has not yet buy this game code-->
+                    <!-- <a href="#" class="btn-buy">Buy</a> -->
 
-
-
-                    <div class="bottom">
-
-                        <p class="message">
-                            <b class="petDescription"> {{photo.description}} </b>
-                        </p>
-
-
-                        <!-- Photo description -->
-                        <div class="pet-details">
-                            <p class="petName">Name: {{photo.name}} </p>
-                            <p class="petAge">Age: {{photo.age}} </p>
-                        </div>
-                        <div class="comments">
-                            <div class="comments-top">
-                                <div class="userDetails">
-                                    <div class="comment-data">
-                                        <div class="profilepic">
-                                            <div class="profile_img">
-                                                <div class="image">
-                                                    <!-- User Profile Image -->
-                                                    <img src="/images/person.png" alt="img8">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--User's username-->
-                                        <p><b>StevIvanov</b>- OMG where can i get one</p>
-                                    </div>
-                                </div>
-                                <div class="userDetails">
-                                    <div class="comment-data">
-                                        <div class="profilepic">
-                                            <div class="profile_img">
-                                                <div class="image">
-                                                    <!-- User Profile Image -->
-                                                    <img src="/images/person.png" alt="img8">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--User's username-->
-                                        <p><b>StevIvanov</b>- OMG where can i get one</p>
-                                    </div>
-                                </div>
-                                <div class="userDetails">
-                                    <div class="comment-data">
-                                        <div class="profilepic">
-                                            <div class="profile_img">
-                                                <div class="image">
-                                                    <!-- User Profile Image -->
-                                                    <img src="/images/person.png" alt="img8">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--User's username-->
-                                        <p><b>StevIvanov</b>- OMG where can i get one</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{#if isAuthenticated}}
-                    {{#unless isOwner}}
-                    <div class="addComments">
-                        <!-- Start Add Comments Form -->
-                        <form method="#" action="#">
-                            <textarea id="comment-textarea" name="" cols="40" rows="10"
-                                placeholder="Add comment..."></textarea>
-                            <!-- Post Comments Button -->
-                            <button type="submit">Post</button>
-                        </form>
-                    </div>
-                    {{/unless}}
-                    {{/if}}
+                    <!-- Logged in user who has already buy this game code-->
+                    <!-- <p class="buy-message">You have already bought this game</p> -->
                 </div>
             </div>
-        </div>
+        </section>
     </main>
-
