@@ -1,12 +1,20 @@
 const Photo = require('../models/Photo');
-const petsManager = require('../manager/petsManager')
+const petsManager = require('../manager/petsManager');
+const { getErrorMessage } = require('../utils/errorHandler.js');
 
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
     
-  const pet = await petsManager.getAll();
-    res.render('photo', {pet})
+   try {
+       const pet = await petsManager.getAll();
+         res.render('photo', {pet})
+    
+   } catch (error) {
+
+        res.render('/photo', {error: getErrorMessage(err)}) 
+
+   } 
 });
 
 
@@ -15,6 +23,7 @@ router.get('/', async (req, res) => {
 router.get('/create', (req, res) => {
     res.render('photo/create')
 });
+
 router.post('/create', async (req, res) => {
    
     const photoData = {
@@ -24,10 +33,11 @@ router.post('/create', async (req, res) => {
         
 try {
     await petsManager.create(photoData)
-    res.redirect('/catalog')
+    res.redirect('/photo')
     
-} catch (error) {
-     throw new Error `${error}`
+} catch (err) {
+
+     res.render('photo/create', {error: getErrorMessage(err)})
     
 }
     
@@ -38,25 +48,51 @@ try {
 });
 
 router.get('/:photoId', async (req,res) => {
-    const photoId = req.params.photoId;
-    const photo = await petsManager.getOne(photoId).lean();
-    const isOwner = req.user?._id == photo.owner._id;
-    
 
-    res.render('photo/details', { photo, isOwner })
+    try {
+        const photoId = req.params.photoId;
+        const photo = await petsManager.getOne(photoId).lean();
+        const isOwner = req.user?._id == photo.owner._id;
+        
+    
+        res.render('photo/details', { photo, isOwner })
+        
+    } catch (error) {
+        
+        res.render('photo/details', {error: getErrorMessage(err)})
+        
+    }
+
+
 
 })
 router.get('/:photoId/delete', async (req, res) => {
 
-    const photo = await petsManager.delete(req.params.photoId);
+    try {
+        const photo = await petsManager.delete(req.params.photoId);
+        res.redirect('/')
+        
+    } catch (error) {
+        
+        res.render('photo/details', {error: getErrorMessage(err)})
+    }
+
     
 });
 
 router.get('/:photoId/edit', async (req, res) => {
 
-    const photo = await petsManager.getOne(req.params.photoId).lean();
+    try {
+        const photo = await petsManager.getOne(req.params.photoId).lean();
+    
+        res.render('photo/edit', { photo })
+        
+    } catch (error) {
+        
+        res.render('photo/edit', {error: getErrorMessage(err)})
 
-    res.render('photo/edit', { photo })
+    }
+
 });
 
 
@@ -64,8 +100,13 @@ router.post('/:photoId/edit', async (req, res) => {
 const petData = req.body;
 const photoId = req.params.photoId
 
-await petsManager.edit(photoId, petData);
-res.redirect(`/`) 
+try {
+    await petsManager.edit(photoId, petData);
+    res.redirect(`/`) 
+    
+} catch (error) {
+    res.render('/', {error: getErrorMessage(err)})
+}
 
 }); 
 
